@@ -51,3 +51,22 @@ export class RestaurantsResolver {
 
 - Test Resolver를 만들면 상기의 schema 파일에 자동으로 등록되는 것을 볼 수 있다.
 - 위와 같이 등록한 스키마는 개발환경의 URL에서 /graphql로 이동하면 playground에서 확인할 수 있다.
+
+#### ArgsType InputType
+
+- InputType : 말그대로 Input 타입을 정의한다. GraphQL의 Argument type 정의. 하나의 Object 선언
+- ArgsType : 분리된 값들을 GraphQL argument로 전달해 줄 수 있도록 함. 하나의 Object에 담지 않음 -> class 유효성 검사도 가능하다.
+
+#### class validator 설치
+
+```
+ npm i class-validator
+ npm i class-transformer
+```
+
+```
+  @IsString() //class validator
+  @Length(5, 10) //class validator
+```
+
+- 위와 같은 식으로 Field를 점검할 수 있다. 물론 main.ts에서 App.UseGlobalPipes(new ValidationPipe()) 를 실행하자

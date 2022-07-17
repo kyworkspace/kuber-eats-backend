@@ -1,4 +1,5 @@
 import { ArgsType, Field, InputType } from '@nestjs/graphql';
+import { IsBoolean, IsString, Length } from 'class-validator';
 
 /*
     InputType : 말그대로 Input 타입을 정의한다. GraphQL의 Argument type 정의. 하나의 Object 선언
@@ -8,8 +9,20 @@ import { ArgsType, Field, InputType } from '@nestjs/graphql';
 
 @ArgsType()
 export class CreateRestaurantDto {
-  @Field((type) => String) name: string;
-  @Field((type) => Boolean) isVegan: boolean;
-  @Field((type) => String) address: string;
-  @Field((type) => String) ownerName: string;
+  @Field((type) => String)
+  @IsString() //class validator
+  @Length(5, 10) //class validator
+  name: string;
+
+  @Field((type) => Boolean)
+  @IsBoolean()
+  isVegan: boolean;
+
+  @Field((type) => String)
+  @IsString()
+  address: string;
+
+  @Field((type) => String)
+  @IsString()
+  ownerName: string;
 }
