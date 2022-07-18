@@ -4,6 +4,16 @@ Kuber eats Clone의 백엔드 입니다.
 
 - Nest JS 환경
 - GraphQL 사용
+- TypeORM(Object Relation Mapper)
+- Postgres
+
+#### Configuration
+
+```
+npm i --save @nestjs/config
+```
+
+- dotenv의 최상위에서 실행됨
 
 #### GraphQL 세팅
 
