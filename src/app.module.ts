@@ -6,12 +6,6 @@ import { TypeOrmModule } from '@nestjs/typeorm';
 import { join } from 'path';
 import { RestaurantsModule } from './restaurants/restaurants.module';
 
-console.log('DB_HOST', process.env.DB_HOST);
-console.log('DB_PORT', process.env.DB_PORT);
-console.log('DB_USERNAME', process.env.DB_USERNAME);
-console.log('DB_PASSWORD', process.env.DB_PASSWORD);
-console.log('DB_NAME', process.env.DB_NAME);
-console.log('NODE_ENV', process.env.NODE_ENV);
 @Module({
   imports: [
     ConfigModule.forRoot({
@@ -25,7 +19,7 @@ console.log('NODE_ENV', process.env.NODE_ENV);
       host: process.env.DB_HOST,
       port: +process.env.DB_PORT, //env에서 불러오는 내용은 기본적으로 String이기 때문에 캐스팅 해야한다.
       username: process.env.DB_USERNAME,
-      password: `${process.env.DB_PASSWORD}`, //localhost의 경우 password를 신경쓰지 않는다.
+      password: process.env.DB_PASSWORD, //localhost의 경우 password를 신경쓰지 않는다.
       database: process.env.DB_NAME,
       synchronize: true, // typeorm이 DB에 연결할때 데이터 베이스를 모듈이 현재 상태로 마이그레이션 한다는 의미
       logging: false,
