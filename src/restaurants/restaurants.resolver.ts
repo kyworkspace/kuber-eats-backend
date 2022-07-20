@@ -14,7 +14,6 @@ export class RestaurantsResolver {
     return this.restaurantService.getAll();
   }
   @Mutation((returns) => Boolean)
-
   /*
   createRestaurant(
     @Args('name') name: string,
@@ -25,11 +24,17 @@ export class RestaurantsResolver {
     return true;
   }
   위와 같이 다 적을 수 있지만, InputType을 만들어서 넣을 수 있다.
-
-
   */
-  createRestaurant(@Args() createRestaurantDto: CreateRestaurantDto): boolean {
-    console.log(createRestaurantDto);
-    return true;
+  async createRestaurant(
+    @Args() createRestaurantDto: CreateRestaurantDto,
+  ): Promise<boolean> {
+    try {
+      await this.restaurantService.createRestaurant(createRestaurantDto);
+
+      return true;
+    } catch (error) {
+      console.log(error);
+      return false;
+    }
   }
 }

@@ -108,3 +108,8 @@ TypeOrm에서 syncronize를 true로 하게되면 매 실행할때마다 현재 �
 2. service에서 @Injectable() 클래스 생성
 3. 원하는 엔티티를 InjectRepository 를 사용하여 레포지토리를 서비스에 주입
 4. this.[선언명] => 함수 사용
+
+#### create? save?
+
+- create : Dto의 인스턴스를 통해서 엔티티를 생성함. DB 저장하지 않음
+- save : 실제로 DB 저장
