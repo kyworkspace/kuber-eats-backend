@@ -89,3 +89,22 @@ export class RestaurantsResolver {
 ```
 
 - 위와 같은 식으로 Field를 점검할 수 있다. 물론 main.ts에서 App.UseGlobalPipes(new ValidationPipe()) 를 실행하자
+
+### TypeOrm
+
+TypeOrm에서 syncronize를 true로 하게되면 매 실행할때마다 현재 선언된 엔티티를 중심으로 DB를 동기화한다.
+
+- Entity : typeorm이 Column등으로 지정한 엔티티를 DB에 저장하게 해줌
+- Column : 선언된 칼럼은 DB의 칼럼과 연동 된다.
+- Interaction : 마치 JPA ORM 같다.
+  1. Data Mapper : Entity와 상호작용하는 Repository를 사용한다. 유지관리를 돕고 대규모 앱에 유용하다.
+  - NestJs + TypeORM 개발 환경에서 Repository를 사용하는 모듈을 쓸수 있기 때문에 여기에 사용함.
+  - repo를 사용하면 어디든지 접근가능하다.
+  2. Active Record : BaseEntity 를 상속 받아야 한다. 소규모에서 단순하게 사용한다.
+
+### Reposity
+
+1. Import Repository
+2. service에서 @Injectable() 클래스 생성
+3. 원하는 엔티티를 InjectRepository 를 사용하여 레포지토리를 서비스에 주입
+4. this.[선언명] => 함수 사용

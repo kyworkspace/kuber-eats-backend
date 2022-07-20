@@ -1,14 +1,17 @@
 import { Args, Mutation, Query, Resolver } from '@nestjs/graphql';
 import { CreateRestaurantDto } from './dtos/create-restaurant.dto';
 import { Restaurants } from './entities/restaurant.entity';
+import { RestaurantService } from './restaurants.service';
 
 @Resolver((of) => Restaurants) //argument가 필수는 아님
 export class RestaurantsResolver {
+  constructor(private readonly restaurantService: RestaurantService) {}
+
   //returns 라는 표현은 @Query의 리턴타입을 정의하기 위해 화살표함수를 위한 표현이다. ()=>type ...과 같은 뜻이다.
+  //Args를 등록하여 필터 조회가 될 수 있도록 한다.
   @Query((returns) => [Restaurants])
-  restaurants(@Args('veganOnly') veganOnly: boolean): Restaurants[] {
-    //Args를 등록하여 필터 조회가 될 수 있도록 한다.
-    return [];
+  restaurants(): Promise<Restaurants[]> {
+    return this.restaurantService.getAll();
   }
   @Mutation((returns) => Boolean)
 
