@@ -5,12 +5,10 @@ import { GraphQLModule } from '@nestjs/graphql';
 import { TypeOrmModule } from '@nestjs/typeorm';
 import * as Joi from 'joi';
 import { getEnvPath } from './common/helper/env.helper';
+import { Restaurants } from './restaurants/entities/restaurant.entity';
 import { RestaurantsModule } from './restaurants/restaurants.module';
 
 const envFilePath: string = getEnvPath(`${__dirname}/common/envs`);
-
-console.log(process.env.NODE_ENV);
-console.log(process.env.DB_HOST);
 
 @Module({
   imports: [
@@ -34,8 +32,9 @@ console.log(process.env.DB_HOST);
       username: 'postgres',
       password: '0923445', //localhost의 경우 password를 신경쓰지 않는다.
       database: 'kuber-eats',
-      synchronize: true, // typeorm이 DB에 연결할때 데이터 베이스를 모듈이 현재 상태로 마이그레이션 한다는 의미
+      synchronize: process.env.NODE_ENV !== 'prod', // typeorm이 DB에 연결할때 데이터 베이스를 모듈이 현재 상태로 마이그레이션 한다는 의미 . 일단 dev일때만 마이그레이션 하도록함
       logging: false,
+      entities: [Restaurants], //엔티티에서 만든것이 자동으로 DB에 꽂히도록 entity를 정의함
     }),
     GraphQLModule.forRoot<ApolloDriverConfig>({
       driver: ApolloDriver,
