@@ -6,6 +6,7 @@ Kuber eats Clone의 백엔드 입니다.
 - GraphQL 사용
 - TypeORM(Object Relation Mapper)
 - Postgres
+- joi
 
 #### Configuration
 
