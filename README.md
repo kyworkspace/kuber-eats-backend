@@ -8,6 +8,14 @@ Kuber eats Clone의 백엔드 입니다.
 - Postgres
 - joi
 
+## How To Use Environment Variables With NestJS
+
+```
+https://blog.devgenius.io/environment-variables-in-nest-js-b989bb0370bf
+```
+
+- 일단 내용 조금 바꾸긴 했는데, 일단 지금(07.20)은 에러 안남
+
 #### Configuration
 
 ```
