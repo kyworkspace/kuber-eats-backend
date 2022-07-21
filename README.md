@@ -113,3 +113,11 @@ TypeOrm에서 syncronize를 true로 하게되면 매 실행할때마다 현재 �
 
 - create : Dto의 인스턴스를 통해서 엔티티를 생성함. DB 저장하지 않음
 - save : 실제로 DB 저장
+
+#### Mapped typeds
+
+- 1개의 파일로 entity, dto, ObjectType를 표시
+  1. patial Type : 상속받은 baseEntiry를 required가 아닌 요소로 만들어줌
+  2. pick Type : (상속받은) input type에서 몇가지 프로퍼티를 선택해 새로운 class를 만들어줌
+  3. Omit Type : base class에서 class를 만드는데 몇몇 field를 제외하고 만듬
+  4. Intersection type : 상속받은 class를 함께 합쳐줌

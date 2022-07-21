@@ -26,7 +26,7 @@ export class RestaurantsResolver {
   위와 같이 다 적을 수 있지만, InputType을 만들어서 넣을 수 있다.
   */
   async createRestaurant(
-    @Args() createRestaurantDto: CreateRestaurantDto,
+    @Args('input') createRestaurantDto: CreateRestaurantDto,
   ): Promise<boolean> {
     try {
       await this.restaurantService.createRestaurant(createRestaurantDto);
