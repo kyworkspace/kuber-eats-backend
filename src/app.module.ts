@@ -4,11 +4,14 @@ import { ConfigModule } from '@nestjs/config';
 import { GraphQLModule } from '@nestjs/graphql';
 import { TypeOrmModule } from '@nestjs/typeorm';
 import * as Joi from 'joi';
-import { getEnvPath } from './common/helper/env.helper';
+import { getEnvPath } from './config/helper/env.helper';
 import { Restaurants } from './restaurants/entities/restaurant.entity';
 import { RestaurantsModule } from './restaurants/restaurants.module';
+import { UsersModule } from './users/users.module';
+import { CommonModule } from './common/common.module';
+import { User } from './users/entities/user.entity';
 
-const envFilePath: string = getEnvPath(`${__dirname}/common/envs`);
+const envFilePath: string = getEnvPath(`${__dirname}/config/envs`);
 
 @Module({
   imports: [
@@ -34,14 +37,15 @@ const envFilePath: string = getEnvPath(`${__dirname}/common/envs`);
       database: process.env.DB_NAME,
       synchronize: process.env.NODE_ENV !== 'prod', // typeorm이 DB에 연결할때 데이터 베이스를 모듈이 현재 상태로 마이그레이션 한다는 의미 . 일단 dev일때만 마이그레이션 하도록함
       logging: false,
-      entities: [Restaurants], //엔티티에서 만든것이 자동으로 DB에 꽂히도록 entity를 정의함
+      entities: [User], //엔티티에서 만든것이 자동으로 DB에 꽂히도록 entity를 정의함
     }),
     GraphQLModule.forRoot<ApolloDriverConfig>({
       driver: ApolloDriver,
       // autoSchemaFile: join(process.cwd(), 'src/schema.gql'), //자동으로 스키마를 생성한다.
       autoSchemaFile: true, // 메모리에 스키마를 등록한다.
     }),
-    RestaurantsModule,
+    UsersModule,
+    CommonModule,
   ],
   controllers: [],
   providers: [],

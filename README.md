@@ -122,9 +122,26 @@ TypeOrm에서 syncronize를 true로 하게되면 매 실행할때마다 현재 �
   3. Omit Type : base class에서 class를 만드는데 몇몇 field를 제외하고 만듬
   4. Intersection type : 상속받은 class를 함께 합쳐줌
 
-### 3 Validation Check
+#### 3 Validation Check
 
 - 각 항목을 1개의 entity 파일에서 정의하기에 3번씩 테스트하는 것에 익숙해져야함
   1. graphql
   2. database
   3. valadation
+
+## UserEntity:
+
+- id
+- createAt
+- updatedAt
+
+- email
+- password
+- role(client | owner | delivery)
+
+## User CRUD :
+
+- Create Account
+- Log in
+- See Profile
+- Edit Profile
