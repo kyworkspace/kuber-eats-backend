@@ -1,5 +1,6 @@
 import { Args, Mutation, Query, Resolver } from '@nestjs/graphql';
 import { CreateRestaurantDto } from './dtos/create-restaurant.dto';
+import { UpdateRestaurantDto } from './dtos/update-restaurant.dto';
 import { Restaurants } from './entities/restaurant.entity';
 import { RestaurantService } from './restaurants.service';
 
@@ -24,13 +25,27 @@ export class RestaurantsResolver {
     return true;
   }
   위와 같이 다 적을 수 있지만, InputType을 만들어서 넣을 수 있다.
+  Input 타입을 사용할때는 @Args에 Argument name이 들어가야한다.
+  Args 타입은 비워둔다.
   */
   async createRestaurant(
     @Args('input') createRestaurantDto: CreateRestaurantDto,
   ): Promise<boolean> {
     try {
       await this.restaurantService.createRestaurant(createRestaurantDto);
+      return true;
+    } catch (error) {
+      console.log(error);
+      return false;
+    }
+  }
 
+  @Mutation((returns) => Boolean)
+  async updateRestaurant(
+    @Args() updateRestaurantDto: UpdateRestaurantDto,
+  ): Promise<boolean> {
+    try {
+      await this.restaurantService.updateRestaurant(updateRestaurantDto);
       return true;
     } catch (error) {
       console.log(error);

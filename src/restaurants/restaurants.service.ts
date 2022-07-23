@@ -2,6 +2,7 @@ import { Inject, Injectable } from '@nestjs/common';
 import { InjectRepository } from '@nestjs/typeorm';
 import { Repository } from 'typeorm';
 import { CreateRestaurantDto } from './dtos/create-restaurant.dto';
+import { UpdateRestaurantDto } from './dtos/update-restaurant.dto';
 import { Restaurants } from './entities/restaurant.entity';
 
 @Injectable()
@@ -29,5 +30,13 @@ export class RestaurantService {
     const newRestaurant = this.restaurants.create(createRestaurantDto);
     //save는 promise 타입임
     return this.restaurants.save(newRestaurant);
+  }
+
+  updateRestaurant({ id, data }: UpdateRestaurantDto) {
+    /*
+    업데이트 할때는 처번째 args는 search criteria가 들어간다. 여기서는 id
+    update()는 DB에 해당 entity가 있는지 확인하지 않는다.
+    */
+    return this.restaurants.update(id, { ...data });
   }
 }
