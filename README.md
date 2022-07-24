@@ -145,3 +145,7 @@ TypeOrm에서 syncronize를 true로 하게되면 매 실행할때마다 현재 �
 - Log in
 - See Profile
 - Edit Profile
+
+#### enum
+
+- 나열되는 항목에 배열의 인덱스 같은 값이 적용된 형태라고 볼 수 있다.
