@@ -14,7 +14,7 @@ export class UsersService {
     email,
     password,
     role,
-  }: CreateAccountInput): Promise<string | undefined> {
+  }: CreateAccountInput): Promise<{ ok: boolean; error?: string }> {
     // check new User
 
     try {
@@ -22,7 +22,7 @@ export class UsersService {
 
       if (exists) {
         //make error . dup Id
-        return '해당 이메일을 가진 사용자가 존재합니다.';
+        return { ok: false, error: '해당 이메일을 가진 사용자가 존재합니다.' };
       } else {
         //create user  & hash the password
         await this.users.save(
@@ -33,10 +33,11 @@ export class UsersService {
           }),
         );
         //success create account
+        return { ok: true };
       }
     } catch (error) {
       //return
-      return '계정을 생성할 수 없습니다.';
+      return { ok: false, error: '계정을 생성할 수 없습니다.' };
     }
   }
 }
