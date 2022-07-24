@@ -10,7 +10,11 @@ export class UsersService {
     @InjectRepository(User) private readonly users: Repository<User>,
   ) {}
 
-  async createAccount({ email, password, role }: CreateAccountInput) {
+  async createAccount({
+    email,
+    password,
+    role,
+  }: CreateAccountInput): Promise<string | undefined> {
     // check new User
 
     try {
@@ -18,7 +22,7 @@ export class UsersService {
 
       if (exists) {
         //make error . dup Id
-        return;
+        return '해당 이메일을 가진 사용자가 존재합니다.';
       } else {
         //create user  & hash the password
         await this.users.save(
@@ -28,10 +32,11 @@ export class UsersService {
             role,
           }),
         );
-        return true;
+        //success create account
       }
     } catch (error) {
       //return
+      return '계정을 생성할 수 없습니다.';
     }
   }
 }
