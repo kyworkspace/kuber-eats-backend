@@ -102,6 +102,10 @@ TypeOrm에서 syncronize를 true로 하게되면 매 실행할때마다 현재 �
   - repo를 사용하면 어디든지 접근가능하다.
   2. Active Record : BaseEntity 를 상속 받아야 한다. 소규모에서 단순하게 사용한다.
 
+#### Listener and subscribers
+
+- 리스터는 엔티티가 변화할때 실행됨
+
 ### Reposity
 
 1. Import Repository
