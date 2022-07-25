@@ -7,6 +7,7 @@ Kuber eats Clone의 백엔드 입니다.
 - TypeORM(Object Relation Mapper)
 - Postgres
 - joi
+- json web token
 
 ## How To Use Environment Variables With NestJS
 
@@ -153,3 +154,13 @@ TypeOrm에서 syncronize를 true로 하게되면 매 실행할때마다 현재 �
 #### enum
 
 - 나열되는 항목에 배열의 인덱스 같은 값이 적용된 형태라고 볼 수 있다.
+
+### json web token
+
+- private key를 중심으로 알고리즘을 바탕으로 암호화하며 특정 사용자가 임의로 수정한 경우 , private key를 통해 확인가능하다.
+
+```
+https://randomkeygen.com/
+```
+
+- 위 홈페이지에서 key를 참고 하였다.
