@@ -218,3 +218,19 @@ imports: [
 
 - 함수형 미들웨어는 main.ts에서 사용가능하다 : 전역에서 사용할때 유용
 - class 미들웨어를 사용하려면 app 모듈에서 해야한다.
+
+### GraphQL Context
+
+- context를 사용하게 되면 어떤 Resolver에서도 사용가능하다.
+- 모든 request를 받아서 내부처리를 하도록 함수로 정의된다.
+- 해당 플젝에서는 HTTP req를 통해 들어온 토큰으로 미들웨어서 user정보를 set하도록 되어있다.
+- 해당 user 정보를 context로 공유한다.
+
+```
+    GraphQLModule.forRoot<ApolloDriverConfig>({
+     ...
+     context: ({ req }) => ({
+       user: req['user'],
+     }),
+   }),
+```
