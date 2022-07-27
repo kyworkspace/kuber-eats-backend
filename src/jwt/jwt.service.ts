@@ -20,4 +20,8 @@ export class JwtService {
   sign(userId: number): string {
     return jwt.sign({ userId }, this.configService.get('PRIVATE_KEY'));
   }
+
+  verify(token: string): string | jwt.JwtPayload {
+    return jwt.verify(token, this.configService.get('PRIVATE_KEY'));
+  }
 }

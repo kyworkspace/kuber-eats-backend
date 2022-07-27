@@ -1,5 +1,10 @@
 import { ApolloDriver, ApolloDriverConfig } from '@nestjs/apollo';
-import { Module } from '@nestjs/common';
+import {
+  MiddlewareConsumer,
+  Module,
+  NestModule,
+  RequestMethod,
+} from '@nestjs/common';
 import { ConfigModule } from '@nestjs/config';
 import { GraphQLModule } from '@nestjs/graphql';
 import { TypeOrmModule } from '@nestjs/typeorm';
@@ -11,6 +16,7 @@ import { UsersModule } from './users/users.module';
 import { CommonModule } from './common/common.module';
 import { User } from './users/entities/user.entity';
 import { JwtModule } from './jwt/jwt.module';
+import { JwtMiddleware } from './jwt/jwt.middleware';
 
 const envFilePath: string = getEnvPath(`${__dirname}/config/envs`);
 
@@ -55,4 +61,19 @@ const envFilePath: string = getEnvPath(`${__dirname}/config/envs`);
   controllers: [],
   providers: [],
 })
-export class AppModule {}
+export class AppModule implements NestModule {
+  //middleware 설정
+  configure(consumer: MiddlewareConsumer) {
+    //사용자가 정의한 미들웨어를 적용
+    //.forRoutes :  특정 Routes에만 적용할 경우 작성
+    //.exclude :  특정 Routes를 제외할 경우
+    consumer.apply(JwtMiddleware).forRoutes({
+      path: '/graphql',
+      method: RequestMethod.ALL,
+    });
+    // consumer.apply(JwtMiddleware).exclude({
+    //   path: '/api',
+    //   method: RequestMethod.ALL,
+    // });
+  }
+}
