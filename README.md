@@ -186,3 +186,30 @@ imports: [
   JwtModule,
 ],
 ```
+
+#### module Provider
+
+```
+ static forRoot(options: JwtModuleOptions): DynamicModule {
+    return {
+      ...
+      providers: [JwtService],
+    };
+  }
+```
+
+- 위 코드의 표현으 아래의 코드와 같은 역할이다.
+
+```
+ static forRoot(options: JwtModuleOptions): DynamicModule {
+    return {
+      ...
+      providers: [
+        {
+          provide: JwtService,
+          useClass: JwtService,
+        },
+      ],
+    };
+  }
+```
