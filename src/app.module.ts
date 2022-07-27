@@ -10,6 +10,7 @@ import { RestaurantsModule } from './restaurants/restaurants.module';
 import { UsersModule } from './users/users.module';
 import { CommonModule } from './common/common.module';
 import { User } from './users/entities/user.entity';
+import { JwtModule } from './jwt/jwt.module';
 
 const envFilePath: string = getEnvPath(`${__dirname}/config/envs`);
 
@@ -45,6 +46,7 @@ const envFilePath: string = getEnvPath(`${__dirname}/config/envs`);
       // autoSchemaFile: join(process.cwd(), 'src/schema.gql'), //자동으로 스키마를 생성한다.
       autoSchemaFile: true, // 메모리에 스키마를 등록한다.
     }),
+    JwtModule.forRoot(),
     UsersModule,
     CommonModule,
   ],

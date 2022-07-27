@@ -164,3 +164,25 @@ https://randomkeygen.com/
 ```
 
 - 위 홈페이지에서 key를 참고 하였다.
+
+### Module의 종류
+
+1. Static Module : 특별히 설정을 하지 않는 모듈
+2. Dynamic Module : forRoot를 설정하는 모듈 - 동적인 설정이 필요한 모듈이다.
+
+```
+imports: [
+  ConfigModule.forRoot({
+    ...
+  }),
+  TypeOrmModule.forRoot({ //<-- Dynamic Module
+    ...
+  }),
+  GraphQLModule.forRoot<ApolloDriverConfig>({
+    ...
+  }),
+  UsersModule, // <- Static Module
+  CommonModule,
+  JwtModule,
+],
+```
