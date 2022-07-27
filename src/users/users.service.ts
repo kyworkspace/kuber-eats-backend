@@ -72,7 +72,7 @@ export class UsersService {
           error: '비밀번호가 틀렸습니다.',
         };
       }
-      const token = jwt.sign({ id: user.id }, this.confg.get('SECRET_KEY'));
+      const token = this.JwtService.sign(user.id);
       return {
         ok: true,
         token: token,
