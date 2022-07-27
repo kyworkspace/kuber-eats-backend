@@ -51,6 +51,12 @@ const envFilePath: string = getEnvPath(`${__dirname}/config/envs`);
       driver: ApolloDriver,
       // autoSchemaFile: join(process.cwd(), 'src/schema.gql'), //자동으로 스키마를 생성한다.
       autoSchemaFile: true, // 메모리에 스키마를 등록한다.
+
+      //context를 사용하게 되면 어떤 Resolver에서도 사용가능하다. 함수로 정의된다.
+      context: ({ req }) => ({
+        //req에는 미들웨어에서 정의된 user가 들어가있다. 이미
+        user: req['user'],
+      }),
     }),
     JwtModule.forRoot({
       privateKey: process.env.PRIVATE_KEY,
@@ -69,7 +75,7 @@ export class AppModule implements NestModule {
     //.exclude :  특정 Routes를 제외할 경우
     consumer.apply(JwtMiddleware).forRoutes({
       path: '/graphql',
-      method: RequestMethod.ALL,
+      method: RequestMethod.POST,
     });
     // consumer.apply(JwtMiddleware).exclude({
     //   path: '/api',
