@@ -23,7 +23,6 @@ export class JwtMiddleware implements NestMiddleware {
         //토큰에 있는 아이디를 추출
         try {
           const user = await this.userService.findById(decoded['id']);
-          console.log(user);
           //미들웨어에서 처리된 유저 정보가 request에 담김
           req['user'] = user;
         } catch (error) {}

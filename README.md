@@ -8,6 +8,7 @@ Kuber eats Clone의 백엔드 입니다.
 - Postgres
 - joi
 - json web token
+- useGuard - authentication
 
 ## How To Use Environment Variables With NestJS
 
@@ -107,7 +108,7 @@ TypeOrm에서 syncronize를 true로 하게되면 매 실행할때마다 현재 �
 
 - 리스터는 엔티티가 변화할때 실행됨
 
-### Reposity
+### Repository
 
 1. Import Repository
 2. service에서 @Injectable() 클래스 생성
@@ -132,24 +133,7 @@ TypeOrm에서 syncronize를 true로 하게되면 매 실행할때마다 현재 �
 - 각 항목을 1개의 entity 파일에서 정의하기에 3번씩 테스트하는 것에 익숙해져야함
   1. graphql
   2. database
-  3. valadation
-
-## UserEntity:
-
-- id
-- createAt
-- updatedAt
-
-- email
-- password
-- role(client | owner | delivery)
-
-## User CRUD :
-
-- Create Account
-- Log in
-- See Profile
-- Edit Profile
+  3. validation
 
 #### enum
 
