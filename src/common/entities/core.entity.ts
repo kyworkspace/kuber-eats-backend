@@ -1,4 +1,4 @@
-import { Field } from '@nestjs/graphql';
+import { Field, ObjectType } from '@nestjs/graphql';
 import {
   CreateDateColumn,
   Entity,
@@ -6,10 +6,10 @@ import {
   UpdateDateColumn,
 } from 'typeorm';
 
-@Entity()
+@ObjectType()
 export class CoreEntity {
   @PrimaryGeneratedColumn()
-  @Field((type) => String)
+  @Field((type) => Number)
   id: number;
   /*
    CreateDataColumn : entity를 만들었을때 자동으로 설정해주는 special column
