@@ -18,15 +18,15 @@ export class JwtMiddleware implements NestMiddleware {
     //express랑 같은 느낌이다.
     if ('x-jwt' in req.headers) {
       const token = req.headers['x-jwt']; //token타입이 string | string[] 이기 때문에 verify 단계에서 string으로 전환
-      const decoded = this.jwtService.verify(token.toString());
-      if (typeof decoded === 'object' && decoded.hasOwnProperty('id')) {
-        //토큰에 있는 아이디를 추출
-        try {
+      //토큰에 있는 아이디를 추출
+      try {
+        const decoded = this.jwtService.verify(token.toString());
+        if (typeof decoded === 'object' && decoded.hasOwnProperty('id')) {
           const user = await this.userService.findById(decoded['id']);
           //미들웨어에서 처리된 유저 정보가 request에 담김
           req['user'] = user;
-        } catch (error) {}
-      }
+        }
+      } catch (error) {}
     }
     next();
   }
