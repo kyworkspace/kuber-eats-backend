@@ -7,6 +7,7 @@ import { User } from './entities/user.entity';
 import * as jwt from 'jsonwebtoken';
 import { ConfigService } from '@nestjs/config';
 import { JwtService } from 'src/jwt/jwt.service';
+import { EditProfileInput } from './dtos/edit-profile.dto';
 
 @Injectable()
 export class UsersService {
@@ -87,5 +88,11 @@ export class UsersService {
 
   async findById(id: number): Promise<User> {
     return this.users.findOne({ where: { id } });
+  }
+
+  async editProfile(userId: number, editProfileInput: EditProfileInput) {
+    //로그인 해야 사용할수느 있는 로직이기 때문에 update 사용해도 가능
+    //{id : userId} 해도됨
+    return this.users.update(userId, { ...editProfileInput });
   }
 }
