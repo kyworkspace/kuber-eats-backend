@@ -90,9 +90,18 @@ export class UsersService {
     return this.users.findOne({ where: { id } });
   }
 
-  async editProfile(userId: number, editProfileInput: EditProfileInput) {
+  async editProfile(userId: number, { email, password }: EditProfileInput) {
     //로그인 해야 사용할수느 있는 로직이기 때문에 update 사용해도 가능
     //{id : userId} 해도됨
-    return this.users.update(userId, { ...editProfileInput });
+    // 단순히 업데이트만 하기 때문에 beforeUpdate를 타지 못함 update => save 사용
+
+    const user = await this.users.findOne({ where: { id: userId } });
+    if (email) {
+      user.email = email;
+    }
+    if (password) {
+      user.password = password;
+    }
+    return this.users.save(user);
   }
 }
